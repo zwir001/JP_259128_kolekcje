@@ -11,6 +11,13 @@ package tb.soft;
 
 import java.util.Scanner;
 
+/**
+ * Biblioteka metod do realizacji dialogu z użytkownikiem
+ * w prostych aplikacjach bez graficznego interfejsu użytkownika.
+ *
+ * @author Paweł Rogaliński
+ *
+ */
 public class ConsoleUserDialog {
 	
 	   private final String  ERROR_MESSAGE =
