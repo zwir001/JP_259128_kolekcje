@@ -1,5 +1,6 @@
 package tb.soft;
 
+import javax.xml.transform.stream.StreamSource;
 import java.util.Arrays;
 
 /**
@@ -43,11 +44,12 @@ public class PersonConsoleApp {
 	private static final ConsoleUserDialog UI = new ConsoleUserDialog();
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		// Utworzenie obiektu aplikacji konsolowej
 		// oraz uruchomienie głównej pętli aplikacji.
 		PersonConsoleApp application = new PersonConsoleApp();
-		application.runMainLoop();
+		application.runMainLoop_2();
+
 	} 
 
 	
@@ -115,8 +117,28 @@ public class PersonConsoleApp {
 			}
 		} // koniec pętli while
 	}
-	
-	
+
+	public void runMainLoop_2(){
+		Person a=new Person("Jakub","Wirwis", 2001, "Student");
+		Person b=new Person("Marian","Was", 1977, "Dyrektor");
+		Person c=new Person("Paweł","Grok", 1988, "Student");
+		Person d=new Person("Jan","Kowalski", 1944, "Kierownik");
+		Person e=new Person("Adam","Kowalski", 1988, "Nauczyciel");
+		Person f=new Person("Adam","Kowalski", 1945, "Gość");
+
+		Person2 a1=new Person2("Jakub","Wirwis", 1900, "Student");
+		Person2 b1=new Person2("Marian","Was", 1977, "Dyrektor");
+		Person2 c1=new Person2("Paweł","Grok", 1988, "Student");
+		Person2 d1=new Person2("Jan","Kowalski", 1944, "Kierownik");
+		Person2 e1=new Person2("Adam","Kowalski", 1988, "Nauczyciel");
+		Person2 f1=new Person2("Adam","Kowalski", 1945, "Gość");
+
+		System.out.println("Program ilustrujący różnice między typami kolekcji:");
+		UI.printInfoMessage("By przejść dalej:");
+
+
+	}
+
 	/*
 	 *  Metoda wyświetla w oknie konsoli dane aktualnej osoby 
 	 *  pamiętanej w zmiennej currentPerson.
@@ -134,8 +156,8 @@ public class PersonConsoleApp {
 		StringBuilder sb = new StringBuilder();
 		
 		if (person != null) {
-			sb.append("Aktualna osoba: \n")
-			  .append("      Imię: ").append(person.getFirstName()).append("\n")
+			//sb.append("Aktualna osoba: \n")
+			  sb.append("      Imię: ").append(person.getFirstName()).append("\n")
 			  .append("  Nazwisko: ").append(person.getLastName()).append("\n")
 			  .append("   Rok ur.: ").append(person.getBirthYear()).append("\n")
 			  .append("Stanowisko: ").append(person.getJob()).append("\n");
@@ -175,8 +197,9 @@ public class PersonConsoleApp {
 		}
 		return person;
 	}
-	
-	
+
+
+
 	/* 
 	 * Metoda pozwala wczytać nowe dane dla poszczególnych atrybutów 
 	 * obiekty person i zmienia je poprzez wywołanie odpowiednich setterów z klasy Person.

@@ -40,8 +40,9 @@ enum PersonJob {
 	private PersonJob(String job_name) {
 		jobName = job_name;
 	}
-
-	
+	public void editJob(String job_name){
+		this.jobName=job_name;
+	}
 	@Override
 	public String toString() {
 		return jobName;
@@ -92,7 +93,14 @@ public class Person {
 		setLastName(last_name);
 		job = PersonJob.UNKNOWN;
 	}
-
+	public Person(String first_name, String last_name, int birth_year, String job_name)
+	{
+		this.firstName=first_name;
+		this.lastName=last_name;
+		this.birthYear=birth_year;
+		job = PersonJob.UNKNOWN;
+		job.editJob(job_name);
+	}
 	
 	public String getFirstName() {
 		return firstName;
