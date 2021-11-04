@@ -1,7 +1,6 @@
 package tb.soft;
 
-import javax.xml.transform.stream.StreamSource;
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * Program: Aplikacja działająca w oknie konsoli, która umożliwia testowanie 
@@ -34,7 +33,15 @@ public class PersonConsoleApp {
 	        "3 - Rok urodzenia  \n" + 
 			"4 - Stanowisko     \n" +
 	        "0 - Powrót do menu głównego\n";
-
+	private static final String COL_MENU =
+			" Właściwości jakiej kolekcji pokazać? \n"+
+			"1 - HashSet, i demonstracja działania kolekcji przy zdefiniowanych i nie metodach hashcode i equals         \n" +
+			"2 - TreeSet       \n" +
+			"3 - ArrayList  \n" +
+			"4 - LinkedList     \n" +
+			"5 - HashMap \n" +
+			"6 - TreeMap \n" +
+			"0 - Powrót do menu głównego\n";
 	
 	/**
 	 * ConsoleUserDialog to pomocnicza klasa zawierająca zestaw
@@ -117,26 +124,134 @@ public class PersonConsoleApp {
 			}
 		} // koniec pętli while
 	}
+/*
+*	Metoda runMainLoop_2 główna pętla programu do ilustracji działania różnych typów kolekcji
+ */
+	public void runMainLoop_2() {
+		//deklaracja osób dla klasy bez definicji metod equals i hashcode
 
-	public void runMainLoop_2(){
-		Person a=new Person("Jakub","Wirwis", 2001, "Student");
-		Person b=new Person("Marian","Was", 1977, "Dyrektor");
-		Person c=new Person("Paweł","Grok", 1988, "Student");
-		Person d=new Person("Jan","Kowalski", 1944, "Kierownik");
-		Person e=new Person("Adam","Kowalski", 1988, "Nauczyciel");
-		Person f=new Person("Adam","Kowalski", 1945, "Gość");
+		try {
+			Person a = new Person("Jakub", "Wirwis", 2001);
+			a.setJob("Student");
+			Person b = new Person("Marian", "Was", 1977);
+			b.setJob("Nauczyciel");
+			Person c = new Person("Paweł", "Grok", 1988);
+			c.setJob("Kierownik");
+			Person d = new Person("Jan", "Kowalski", 1944);
+			d.setJob("Dyrektor");
+			Person e = new Person("Adam", "Kowalski", 1988);
+			e.setJob("Kierownik");
+			Person f = new Person("Adam", "Kowalski", 1945);
+			f.setJob("Gość");
+			//deklaracja osób dla klasy z definicją metod equals i hashcode
+			Person2 a1 = new Person2("Jakub", "Wirwis", 1900);
+			a1.setJob("Student");
+			Person2 b1 = new Person2("Marian", "Was", 1977);
+			b1.setJob("Nauczyciel");
+			Person2 c1 = new Person2("Paweł", "Grok", 1988);
+			c1.setJob("Kierownik");
+			Person2 d1 = new Person2("Jan", "Kowalski", 1944);
+			d1.setJob("Dyrektor");
+			Person2 e1 = new Person2("Adam", "Kowalski", 1988);
+			e1.setJob("Kierownik");
+			Person2 f1 = new Person2("Adam", "Kowalski", 1988);
+			f1.setJob("Gość");
 
-		Person2 a1=new Person2("Jakub","Wirwis", 1900, "Student");
-		Person2 b1=new Person2("Marian","Was", 1977, "Dyrektor");
-		Person2 c1=new Person2("Paweł","Grok", 1988, "Student");
-		Person2 d1=new Person2("Jan","Kowalski", 1944, "Kierownik");
-		Person2 e1=new Person2("Adam","Kowalski", 1988, "Nauczyciel");
-		Person2 f1=new Person2("Adam","Kowalski", 1945, "Gość");
+			System.out.println("Program ilustrujący działanie różnych typów kolekcji:");
+			UI.printInfoMessage("By przejść dalej:");
+			while (true) {
+				switch (UI.enterInt(COL_MENU + "==>> ")) {
+					case 1:    //obsługa HashSet
+						UI.printInfoMessage("HashSet:");
 
-		System.out.println("Program ilustrujący różnice między typami kolekcji:");
-		UI.printInfoMessage("By przejść dalej:");
+						Set<Person> z = new HashSet<>();
+						Set<Person2> z1 = new HashSet<>();
+						System.out.println("Dodawanie elementów do kolekcji bez powtórzeń:\n");
+						z.add(a);
+						z.add(b);
+						z.add(f);
 
+						z1.add(a1);
+						z1.add(b1);
+						z1.add(f1);
+						for (Person i : z) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Powtórne wielokrotne dodanie zmiennych a do stosu:");
+						z.add(a);
+						z.add(b);
+						z.add(e);
+						z1.add(a1);
+						z1.add(b1);
+						z1.add(e1); // dodanie obiektu o danych obiektu f1, ale z inną nazwą pracy
+						UI.printInfoMessage("Stos obiektów klasy bez nadpisania metod equals i hashcode:\n");
+						for (Person i : z) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Stos obiektów klasy z nadpisaniem metod equals i hashcode:\n");
+						for (Person i : z1) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Usuwanie:");
+						z.remove(a);
+						for (Person i : z) {
+							showPerson(i);
+						}
+						break;
+					case 2: //Obsługa TreeSet
+						UI.printInfoMessage("TreeSet:");
+						Set<Person> t = new TreeSet<>();
+						Set<Person2> t1 = new TreeSet<>();
+						System.out.println("Dodawanie elementów do kolekcji bez powtórzeń:\n");
+						t.add(a);
+						t.add(b);
+						t.add(f);
 
+						t1.add(a1);
+						t1.add(b1);
+						t1.add(f1);
+						for (Person i : t) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Powtórne wielokrotne dodanie zmiennych a do stosu:");
+						t.add(a);
+						t.add(b);
+						t.add(e);
+						t1.add(a1);
+						t1.add(b1);
+						t1.add(e1); // dodanie obiektu o danych obiektu f1, ale z inną nazwą pracy
+						UI.printInfoMessage("Stos obiektów klasy bez nadpisania metod equals i hashcode:\n");
+						for (Person i : t) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Stos obiektów klasy z nadpisaniem metod equals i hashcode:\n");
+						for (Person i : t1) {
+							showPerson(i);
+						}
+
+						break;
+					case 3: //Obsługa ArrayList
+						UI.printInfoMessage("ArrayList:");
+						List<Person> array = new ArrayList<>();
+						List<Person2> array2 = new ArrayList<>();
+						break;
+					case 4: //LinkedList
+						UI.printInfoMessage("LinkedList:");
+						break;
+					case 5: //HashMap
+						UI.printInfoMessage("HashMap:");
+						break;
+					case 6: //TreeMap
+						UI.printInfoMessage("TreeMap:");
+						break;
+					case 0:
+						UI.printInfoMessage("\nProgram zakończył działanie!");
+						System.exit(0);
+				}
+			}
+		}catch(PersonException e){
+			e.printStackTrace();
+		}
 	}
 
 	/*
