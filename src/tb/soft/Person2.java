@@ -1,7 +1,7 @@
 package tb.soft;
 
 import java.util.Objects;
-
+/* Klasa Person2 zdefiniowane metody hashcode oraz equals */
 public class Person2 extends Person {
 
     public Person2(String first_name, String last_name) throws PersonException {

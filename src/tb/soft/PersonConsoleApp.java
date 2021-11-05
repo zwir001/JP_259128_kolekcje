@@ -35,7 +35,7 @@ public class PersonConsoleApp {
 	        "0 - Powrót do menu głównego\n";
 	private static final String COL_MENU =
 			" Właściwości jakiej kolekcji pokazać? \n"+
-			"1 - HashSet, i demonstracja działania kolekcji przy zdefiniowanych i nie metodach hashcode i equals         \n" +
+			"1 - HashSet         \n" +
 			"2 - TreeSet       \n" +
 			"3 - ArrayList  \n" +
 			"4 - LinkedList     \n" +
@@ -143,6 +143,8 @@ public class PersonConsoleApp {
 			e.setJob("Kierownik");
 			Person f = new Person("Adam", "Kowalski", 1945);
 			f.setJob("Gość");
+			Person g = new Person("Jakub", "Wirwis", 2001);
+			g.setJob("Student");
 			//deklaracja osób dla klasy z definicją metod equals i hashcode
 			Person2 a1 = new Person2("Jakub", "Wirwis", 1900);
 			a1.setJob("Student");
@@ -178,6 +180,7 @@ public class PersonConsoleApp {
 							showPerson(i);
 						}
 						UI.printInfoMessage("Powtórne wielokrotne dodanie zmiennych a do stosu:");
+						z.add(a);
 						z.add(a);
 						z.add(b);
 						z.add(e);
@@ -215,6 +218,7 @@ public class PersonConsoleApp {
 						}
 						UI.printInfoMessage("Powtórne wielokrotne dodanie zmiennych a do stosu:");
 						t.add(a);
+						t.add(a);
 						t.add(b);
 						t.add(e);
 						t1.add(a1);
@@ -228,21 +232,142 @@ public class PersonConsoleApp {
 						for (Person i : t1) {
 							showPerson(i);
 						}
-
+						UI.printInfoMessage("Usuwanie:");
+						t.remove(a);
+						for (Person i : t) {
+							showPerson(i);
+						}
 						break;
 					case 3: //Obsługa ArrayList
 						UI.printInfoMessage("ArrayList:");
 						List<Person> array = new ArrayList<>();
-						List<Person2> array2 = new ArrayList<>();
+						List<Person2> array1 = new ArrayList<>();
+						System.out.println("Dodawanie elementów do kolekcji bez powtórzeń:\n");
+						array.add(a);
+						array.add(b);
+						array.add(0,f);
+
+						array1.add(a1);
+						array1.add(b1);
+						array1.add(f1);
+						for (Person i : array) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Powtórne wielokrotne dodanie zmiennych do listy:");
+						array.add(a);
+						array.add(a);
+						array.add(b);
+						array.add(e);
+						array1.add(a1);
+						array1.add(b1);
+						array1.add(e1); // dodanie obiektu o danych obiektu f1, ale z inną nazwą pracy
+						UI.printInfoMessage("Lista obiektów klasy bez nadpisania metod equals i hashcode:\n");
+						for (Person i : array) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Lista obiektów klasy z nadpisaniem metod equals i hashcode:\n");
+						for (Person i : array1) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Usuwanie:");
+						array.remove(a);
+						for (Person i : array) {
+							showPerson(i);
+						}
 						break;
 					case 4: //LinkedList
 						UI.printInfoMessage("LinkedList:");
+						List<Person> linked = new LinkedList<>();
+						List<Person2> linked1 = new LinkedList<>();
+						System.out.println("Dodawanie elementów do kolekcji bez powtórzeń:\n");
+						linked.add(a);
+						linked.add(b);
+						linked.add(0,f);
+
+						linked1.add(a1);
+						linked1.add(b1);
+						linked1.add(f1);
+						for (Person i : linked) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Powtórne wielokrotne dodanie zmiennych do listy:");
+						linked.add(a);
+						linked.add(b);
+						linked.add(e);
+						linked1.add(a1);
+						linked1.add(b1);
+						linked1.add(e1); // dodanie obiektu o danych obiektu f1, ale z inną nazwą pracy
+						UI.printInfoMessage("Lista obiektów klasy bez nadpisania metod equals i hashcode:\n");
+						for (Person i : linked) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Lista obiektów klasy z nadpisaniem metod equals i hashcode:\n");
+						for (Person i : linked1) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Usuwanie:");
+						linked.remove(a);
+						List<Person> remove = new LinkedList<>();
+						remove.add(a);
+						remove.add(b);
+						linked.removeAll(remove);
+						for (Person i : linked) {
+							showPerson(i);
+						}
 						break;
 					case 5: //HashMap
 						UI.printInfoMessage("HashMap:");
+						Map<Integer, Person> hash=new HashMap<>();
+						System.out.println("Dodawanie elementów do kolekcji bez powtórzeń:\n");
+						hash.put(1, a);
+						hash.put(2, b);
+						hash.put(1, f); //dodanie elementu na klucz zajęty
+						for (Person i : hash.values()) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Powtórne wielokrotne dodanie zmiennych do listy:");
+						hash.put(3, a);
+						hash.put(4, b);
+						hash.put(6, a);
+						hash.put(5, e);
+
+						UI.printInfoMessage("Lista obiektów:\n");
+						for (Person i : hash.values()) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Usuwanie:");
+						hash.remove(1);
+						hash.remove(2);
+						for (Person i : hash.values()) {
+							showPerson(i);
+						}
 						break;
 					case 6: //TreeMap
 						UI.printInfoMessage("TreeMap:");
+						Map<Integer, Person> tree=new TreeMap<>();
+						System.out.println("Dodawanie elementów do kolekcji bez powtórzeń:\n");
+						tree.put(1, a);
+						tree.put(2, b);
+						tree.put(1, f); //dodanie elementu na klucz zajęty
+						for (Person i : tree.values()) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Powtórne wielokrotne dodanie zmiennych do listy:");
+						tree.put(3, a);
+						tree.put(4, b);
+						tree.put(6, a);
+						tree.put(5, e);
+
+						UI.printInfoMessage("Lista obiektów:\n");
+						for (Person i : tree.values()) {
+							showPerson(i);
+						}
+						UI.printInfoMessage("Usuwanie:");
+						tree.remove(1);
+						tree.remove(2);
+						for (Person i : tree.values()) {
+							showPerson(i);
+						}
 						break;
 					case 0:
 						UI.printInfoMessage("\nProgram zakończył działanie!");

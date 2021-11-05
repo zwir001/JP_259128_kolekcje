@@ -224,6 +224,9 @@ public class Person implements Comparable{
 
 	@Override
 	public int compareTo(Object o) {
-		return 0;
+		Person var= (Person) o;
+		int comp = this.firstName.compareTo(var.getFirstName());
+		if(comp==0) return this.lastName.compareTo(var.getLastName());
+		return comp;
 	}
 }  // koniec klasy Person
